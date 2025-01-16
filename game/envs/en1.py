@@ -46,7 +46,7 @@ class DoomCaptchaEnv(gym.Env):
             self.reward =  100
             self.done = True
         else:
-            self.reward = -1 * self.alive_time + 30 * self.score
+            self.reward = -1 * self.alive_time + 10 * self.score
         return self.state, self.reward, self.done, False, {"score": self.score, "state": self.game.current_state}
 
 

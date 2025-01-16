@@ -50,6 +50,7 @@ class Trainler:
         if len(model_files) == 0:
             return None
         model_files.sort(key = os.path.getmtime)
+        self.iters = int(os.path.basename(model_files[-1]).split(".")[0])
         return model_files[-1]
 
     def build_model(self, env = None):

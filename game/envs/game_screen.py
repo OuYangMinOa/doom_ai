@@ -40,12 +40,17 @@ class GamePage:
     def reset(self):
         # refresh the page
         self.driver.refresh()
-        time.sleep(2)
+        time.sleep(3)
         self.score = 0
         self.current_state = GameState.START
-        self.open_debug_log()
-        self.game_screen  = self.driver.find_element(By.XPATH, "/html/body/div[4]/div[2]")
-        self.click_game_screen()
+        try:
+            self.open_debug_log()
+            self.game_screen  = self.driver.find_element(By.XPATH, "/html/body/div[4]/div[2]")
+            self.click_game_screen()
+        except Exception as e:
+            print(e)
+            time.sleep(2)
+            self.reset()
 
     @property
     def game_screen_xywh(self) -> tuple[int, int, int, int]:
@@ -53,6 +58,7 @@ class GamePage:
 
     def open_debug_log(self):
         self.driver.find_element(By.XPATH, f"/html/body/label/input").click()
+            
 
     def click_game_screen(self):
         game_screen = self.driver.find_element(By.CLASS_NAME, "captcha-header")
